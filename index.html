@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>São Patrício - Consultoria de Fragrâncias</title>
     
     <link rel="icon" type="image/png" href="favicon.png">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- CONFIGURAÇÕES VISUAIS --- */
         :root {
-            --brand-teal: #2eb0b8;   /* Azul Turquesa */
-            --brand-blue: #00235d;   /* Azul Marinho */
-            --brand-rose: #d4889e;   /* Rosé */
+            --brand-teal: #2eb0b8;   
+            --brand-blue: #00235d;   
+            --brand-rose: #d4889e;   
             --bg-color: #f4f7f6;     
             --card-bg: #ffffff;      
             --text-color: #333333;   
@@ -27,11 +28,11 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px 10px; /* Reduzi padding lateral para mobile */
         }
 
         .logo-top {
-            max-width: 280px;
+            max-width: 250px;
             height: auto;
             margin-bottom: 10px;
             margin-top: 10px;
@@ -39,20 +40,20 @@
 
         h1.titulo-principal {
             color: var(--brand-blue);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 5px;
         }
 
         p.subtitulo {
             color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+            font-size: 1rem;
+            margin-bottom: 30px;
         }
 
-        /* --- FILTROS DE GÊNERO (ACCORDION) --- */
+        /* --- FILTROS (ACCORDION) --- */
         .filtros-wrapper {
             max-width: 600px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -66,13 +67,11 @@
             cursor: pointer;
             padding: 10px;
             text-decoration: underline;
-            transition: color 0.3s;
         }
-        .btn-reset-todos:hover { color: var(--brand-blue); }
 
         .filtros-flex-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
         }
 
@@ -85,47 +84,43 @@
         .btn-main-genero {
             background-color: white;
             border: 2px solid transparent;
-            padding: 15px;
+            padding: 12px;
             border-radius: 15px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             color: #666;
+            width: 100%;
         }
 
         .btn-main-genero.masc:hover, .btn-main-genero.masc.ativo {
-            background-color: var(--brand-teal);
-            color: white;
-            box-shadow: 0 8px 20px rgba(46, 176, 184, 0.3);
+            background-color: var(--brand-teal); color: white;
         }
         .btn-main-genero.fem:hover, .btn-main-genero.fem.ativo {
-            background-color: var(--brand-rose);
-            color: white;
-            box-shadow: 0 8px 20px rgba(212, 136, 158, 0.3);
+            background-color: var(--brand-rose); color: white;
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, margin 0.4s ease;
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
             opacity: 0;
             display: flex;
             flex-direction: column;
             gap: 8px;
             margin-top: 0;
-            padding: 0 5px;
         }
 
         .filtro-coluna.ativo .accordion-content {
             max-height: 150px;
             opacity: 1;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .btn-sub {
@@ -136,107 +131,133 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.2s;
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .filtro-coluna.masc .btn-sub:hover, .filtro-coluna.masc .btn-sub.ativo {
-            background-color: var(--brand-teal); color: white; border-color: var(--brand-teal);
-        }
-        .filtro-coluna.fem .btn-sub:hover, .filtro-coluna.fem .btn-sub.ativo {
-            background-color: var(--brand-rose); color: white; border-color: var(--brand-rose);
-        }
+        .filtro-coluna.masc .btn-sub.ativo { background-color: var(--brand-teal); color: white; border-color: var(--brand-teal); }
+        .filtro-coluna.fem .btn-sub.ativo { background-color: var(--brand-rose); color: white; border-color: var(--brand-rose); }
 
-        /* BARRA DE PESQUISA */
-        .search-container {
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: center;
-        }
-        .search-input {
-            width: 100%; max-width: 400px; padding: 12px 20px; font-size: 1rem;
-            border: 2px solid #e1e1e1; border-radius: 50px; outline: none; transition: all 0.3s;
-        }
+        /* BUSCA */
+        .search-container { margin-bottom: 30px; display: flex; justify-content: center; }
+        .search-input { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 1rem; border: 2px solid #e1e1e1; border-radius: 50px; outline: none; }
         .search-input:focus { border-color: var(--brand-teal); }
 
-        /* VITRINE E CARDS */
-        .vitrine { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
-        .card { background-color: var(--card-bg); border: 1px solid #e1e1e1; border-radius: 25px; width: 280px; padding: 25px; box-shadow: 0 15px 30px rgba(0, 35, 93, 0.05); transition: all 0.3s ease; animation: fadeIn 0.6s ease-in-out; display: flex; flex-direction: column; cursor: pointer; position: relative; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .card:hover { transform: translateY(-10px); border-color: var(--brand-teal); }
-        .foto-perfume { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
-        .nome { color: var(--brand-blue); font-size: 1.3rem; font-weight: 700; margin-bottom: 2px; line-height: 1.2; }
-        .marca { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        /* VITRINE */
+        .vitrine { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
+        .card { background-color: var(--card-bg); border: 1px solid #e1e1e1; border-radius: 20px; width: 280px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.3s; display: flex; flex-direction: column; cursor: pointer; position: relative; }
+        .foto-perfume { width: 100%; height: 220px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .nome { color: var(--brand-blue); font-size: 1.2rem; font-weight: 700; margin-bottom: 2px; }
+        .marca { color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
         .avaliacao { color: var(--star-color); font-size: 0.9rem; margin-bottom: 10px; }
-        .preco { color: var(--brand-teal); font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
-        .btn-ver-detalhes { background-color: transparent; border: 2px solid var(--brand-blue); color: var(--brand-blue); width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: auto; }
-        .btn-ver-detalhes:hover { background-color: var(--brand-blue); color: white; }
+        .preco { color: var(--brand-teal); font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; }
+        .btn-ver-detalhes { background-color: transparent; border: 2px solid var(--brand-blue); color: var(--brand-blue); width: 100%; padding: 8px; border-radius: 10px; font-weight: bold; margin-top: auto; }
 
-        /* MODAL */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal-content { background-color: white; width: 90%; max-width: 900px; border-radius: 20px; padding: 30px; position: relative; display: flex; gap: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease; flex-wrap: wrap; }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .btn-fechar { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #888; cursor: pointer; border: none; background: none; }
-        .modal-col-esq { flex: 1; display: flex; justify-content: center; align-items: center; background-color: #f4f7f6; border-radius: 15px; min-width: 250px; overflow: hidden; }
-        .modal-foto-grande { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; }
-        .modal-col-dir { flex: 1.5; text-align: left; display: flex; flex-direction: column; justify-content: center; min-width: 300px; }
-        .modal-titulo { font-size: 2rem; color: var(--brand-blue); margin-bottom: 5px; }
-        .modal-descricao { font-size: 1rem; color: #555; line-height: 1.6; margin-bottom: 25px; font-style: italic; }
-        .look-card { background-color: #f9f9f9; border: 1px solid #eee; border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
-        .look-foto { width: 100px; height: 100px; border-radius: 10px; object-fit: cover; border: 2px solid var(--brand-teal); }
-        .look-texto h4 { margin: 0 0 5px 0; color: var(--brand-blue); }
-        .look-texto p { margin: 0; font-size: 0.9rem; color: #666; }
-        .btn-comprar-modal { background-color: var(--brand-teal); color: white; border: none; padding: 18px; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; width: 100%; transition: 0.3s; }
-        .btn-comprar-modal:hover { background-color: var(--brand-blue); }
-
-        /* RESPONSIVO DO MODAL (CORREÇÃO DE LARGURA) */
-        @media (max-width: 768px) {
-            .modal-content { 
-                flex-direction: column; 
-                padding: 20px;
-                width: 95%; 
-                max-height: 85vh; 
-                overflow-y: auto; 
-                gap: 15px;
-            }
-            .modal-col-esq {
-                min-width: unset;
-                width: 100%;
-                height: 250px; /* Altura fixa para foto não estourar */
-                flex-shrink: 0;
-            }
-            .modal-foto-grande {
-                width: 100%;
-                height: 100%;
-                object-fit: contain; /* Garante que a foto inteira apareça dentro da caixa */
-                background-color: #f4f7f6;
-            }
-            .modal-col-dir {
-                min-width: unset;
-                width: 100%;
-                text-align: center;
-            }
-            .look-card { 
-                flex-direction: column; 
-                text-align: center; 
-            }
-            /* Botão fechar mais visível */
-            .btn-fechar {
-                top: 10px;
-                right: 15px;
-                background-color: rgba(255,255,255,0.8);
-                border-radius: 50%;
-                width: 35px;
-                height: 35px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10;
-            }
+        /* --- MODAL (CONFIGURAÇÃO BLINDADA PARA MOBILE) --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); z-index: 2000;
+            justify-content: center; align-items: center; backdrop-filter: blur(5px);
         }
 
-        .btn-whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
-        .btn-whatsapp-float:hover { transform: scale(1.1); background-color: #128C7E; }
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            display: flex;
+            gap: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+            max-height: 90vh; /* Garante que não passa da altura da tela */
+            overflow: hidden; /* Desktop não precisa rolar */
+        }
+
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .btn-fechar { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #888; cursor: pointer; border: none; background: none; z-index: 10; }
+        
+        .modal-col-esq { 
+            flex: 1; 
+            background-color: #f4f7f6; 
+            border-radius: 15px; 
+            min-width: 250px; 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-foto-grande { width: 100%; height: 100%; object-fit: contain; border-radius: 15px; }
+        
+        .modal-col-dir { 
+            flex: 1.5; 
+            text-align: left; 
+            display: flex; flex-direction: column; justify-content: center; 
+            overflow-y: auto; /* Permite rolar só o texto se precisar */
+        }
+
+        .modal-titulo { font-size: 1.8rem; color: var(--brand-blue); margin-bottom: 5px; }
+        .modal-descricao { font-size: 1rem; color: #555; line-height: 1.5; margin-bottom: 20px; font-style: italic; }
+        
+        .look-card { background-color: #f9f9f9; border: 1px solid #eee; border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .look-foto { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; border: 2px solid var(--brand-teal); flex-shrink: 0; }
+        .look-texto h4 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 1rem; }
+        .look-texto p { margin: 0; font-size: 0.85rem; color: #666; }
+        
+        .btn-comprar-modal { background-color: var(--brand-teal); color: white; border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 10px; cursor: pointer; width: 100%; }
+
+        /* --- CORREÇÃO AGRESSIVA PARA CELULAR --- */
+        @media (max-width: 768px) {
+            .modal-content {
+                flex-direction: column !important; /* Um embaixo do outro */
+                width: 90% !important;
+                height: auto !important;
+                max-height: 85vh !important; /* Altura máxima segura */
+                padding: 20px !important;
+                overflow-y: auto !important; /* Habilita rolagem vertical */
+                display: flex !important;
+                gap: 15px !important;
+            }
+
+            .modal-col-esq {
+                width: 100% !important;
+                height: 200px !important; /* Altura fixa menor para a foto */
+                min-width: 0 !important; /* Remove largura mínima que quebrava o layout */
+                flex-shrink: 0 !important;
+            }
+
+            .modal-foto-grande {
+                height: 100% !important;
+                width: 100% !important;
+                object-fit: contain !important; /* Garante que a foto caiba */
+            }
+
+            .modal-col-dir {
+                width: 100% !important;
+                min-width: 0 !important;
+                text-align: center !important; /* Centraliza tudo */
+                display: block !important;
+                padding-bottom: 20px;
+            }
+
+            .btn-fechar {
+                top: 5px;
+                right: 10px;
+                background-color: rgba(255,255,255,0.9);
+                border-radius: 50%;
+                width: 35px; height: 35px;
+            }
+
+            /* Look Card no Mobile */
+            .look-card {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 10px !important;
+            }
+            
+            .modal-titulo { font-size: 1.5rem; margin-top: 10px; }
+        }
+
+        .btn-whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; }
         .btn-whatsapp-float i { font-size: 30px; }
 
     </style>
@@ -249,11 +270,9 @@
     <p class="subtitulo">Descubra o perfume ideal para cada momento.</p>
 
     <div class="filtros-wrapper">
-        
         <button class="btn-reset-todos" onclick="resetarFiltros()">Ver Todos os Perfumes</button>
 
         <div class="filtros-flex-container">
-            
             <div class="filtro-coluna masc" id="col-masc">
                 <button class="btn-main-genero masc" onclick="toggleAccordion('masculino')">
                     <i class="fa-solid fa-mars"></i> Para Eles
@@ -275,7 +294,6 @@
                     <button class="btn-sub" onclick="filtrarFinal('feminino', 'noite', this)"><i class="fa-solid fa-moon"></i> Noite</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -314,35 +332,33 @@
     </a>
 
     <script>
-        // --- DADOS DOS PERFUMES (USANDO IMAGENS LOCAIS 'imagens/...') ---
+        // --- DADOS (Use suas fotos locais em 'img') ---
         const listaPerfumes = [
             // MASCULINOS
-            { id: 1, nome: "Bleu de Chanel", marca: "Chanel", genero: "masculino", preco: "R$ 899,00", tag: "noite", img: "imagens/bleu.jpg", descricao: "A fragrância do homem que recusa regras. Um amadeirado aromático intenso, elegante e misterioso.", imgLook: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=300&q=80", textoLook: "Ideal para Terno, Blazer ou Camisa Social. Perfeito para reuniões e casamentos.", nota: "5.0", linkPagamento: "#" },
-            { id: 2, nome: "Acqua di Giò", marca: "Giorgio Armani", genero: "masculino", preco: "R$ 450,00", tag: "dia", img: "imagens/acqua.jpg", descricao: "Frescor marinho puro, natural e autêntico. Inspirado na beleza de Pantelleria.", imgLook: "https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?auto=format&fit=crop&w=300&q=80", textoLook: "Combina com bermuda de linho, moda praia ou roupa de treino.", nota: "4.9", linkPagamento: "#" },
-            { id: 3, nome: "Sauvage", marca: "Dior", genero: "masculino", preco: "R$ 650,00", tag: "noite", img: "imagens/sauvage.jpg", descricao: "Uma composição radicalmente fresca e nobre. Ditada por um nome que soa como um manifesto.", imgLook: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=300&q=80", textoLook: "Perfeito para Jaqueta de Couro, All Black e noites frias.", nota: "4.8", linkPagamento: "#" },
-            { id: 4, nome: "Versace Pour Homme", marca: "Versace", genero: "masculino", preco: "R$ 390,00", tag: "dia", img: "imagens/versace.jpg", descricao: "Clássico e contemporâneo. Notas de limão siciliano e sálvia definem esse aroma.", imgLook: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=300&q=80", textoLook: "O par perfeito para Jeans e Camiseta Branca básica.", nota: "4.7", linkPagamento: "#" },
+            { id: 1, nome: "Bleu de Chanel", marca: "Chanel", genero: "masculino", preco: "R$ 899,00", tag: "noite", img: "imagens/bleu.jpg", descricao: "A fragrância do homem que recusa regras. Um amadeirado aromático intenso.", imgLook: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=300&q=80", textoLook: "Ideal para Terno, Blazer ou Camisa Social.", nota: "5.0", linkPagamento: "#" },
+            { id: 2, nome: "Acqua di Giò", marca: "Giorgio Armani", genero: "masculino", preco: "R$ 450,00", tag: "dia", img: "imagens/acqua.jpg", descricao: "Frescor marinho puro, natural e autêntico.", imgLook: "https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?auto=format&fit=crop&w=300&q=80", textoLook: "Combina com bermuda de linho, moda praia ou roupa de treino.", nota: "4.9", linkPagamento: "#" },
+            { id: 3, nome: "Sauvage", marca: "Dior", genero: "masculino", preco: "R$ 650,00", tag: "noite", img: "imagens/sauvage.jpg", descricao: "Uma composição radicalmente fresca e nobre.", imgLook: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=300&q=80", textoLook: "Perfeito para Jaqueta de Couro e noites frias.", nota: "4.8", linkPagamento: "#" },
+            { id: 4, nome: "Versace Pour Homme", marca: "Versace", genero: "masculino", preco: "R$ 390,00", tag: "dia", img: "imagens/versace.jpg", descricao: "Clássico e contemporâneo. Limão siciliano e sálvia.", imgLook: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=300&q=80", textoLook: "O par perfeito para Jeans e Camiseta Branca básica.", nota: "4.7", linkPagamento: "#" },
 
             // FEMININOS
-            { id: 5, nome: "La Vie Est Belle", marca: "Lancôme", genero: "feminino", preco: "R$ 520,00", tag: "noite", img: "imagens/lavie.jpg", descricao: "Um manifesto de felicidade. A primeira íris gourmand, feita para mulheres que querem brilhar.", imgLook: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=300&q=80", textoLook: "Combina com Vestidos de Festa, paetês e elegância noturna.", nota: "5.0", linkPagamento: "#" },
-            { id: 6, nome: "Good Girl", marca: "Carolina Herrera", genero: "feminino", preco: "R$ 599,00", tag: "noite", img: "imagens/goodgirl.jpg", descricao: "Audaz, sexy e enigmática. Para a mulher que ama seu lado bom e celebra seu lado mau.", imgLook: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=300&q=80", textoLook: "Exige Salto Alto, batom vermelho e uma atitude poderosa.", nota: "4.9", linkPagamento: "#" },
-            { id: 7, nome: "Idôle", marca: "Lancôme", genero: "feminino", preco: "R$ 480,00", tag: "dia", img: "imagens/idole.jpg", descricao: "Para mulheres que ousam sonhar. Um chipre floral limpo, moderno e radiante.", imgLook: "https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=300&q=80", textoLook: "Ideal para Alfaiataria, Blazers e ambiente de trabalho.", nota: "4.8", linkPagamento: "#" },
-            { id: 8, nome: "Light Blue", marca: "Dolce & Gabbana", genero: "feminino", preco: "R$ 420,00", tag: "dia", img: "imagens/lightblue.jpg", descricao: "A alegria de viver mediterrânea. Captura os dias ensolarados de verão.", imgLook: "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&w=300&q=80", textoLook: "Perfeito para vestidos leves, estampas florais e praia.", nota: "4.7", linkPagamento: "#" }
+            { id: 5, nome: "La Vie Est Belle", marca: "Lancôme", genero: "feminino", preco: "R$ 520,00", tag: "noite", img: "imagens/lavie.jpg", descricao: "Um manifesto de felicidade. Íris gourmand.", imgLook: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=300&q=80", textoLook: "Combina com Vestidos de Festa e elegância noturna.", nota: "5.0", linkPagamento: "#" },
+            { id: 6, nome: "Good Girl", marca: "Carolina Herrera", genero: "feminino", preco: "R$ 599,00", tag: "noite", img: "imagens/goodgirl.jpg", descricao: "Audaz, sexy e enigmática.", imgLook: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=300&q=80", textoLook: "Exige Salto Alto e uma atitude poderosa.", nota: "4.9", linkPagamento: "#" },
+            { id: 7, nome: "Idôle", marca: "Lancôme", genero: "feminino", preco: "R$ 480,00", tag: "dia", img: "imagens/idole.jpg", descricao: "Para mulheres que ousam sonhar. Chipre floral limpo.", imgLook: "https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=300&q=80", textoLook: "Ideal para Alfaiataria e ambiente de trabalho.", nota: "4.8", linkPagamento: "#" },
+            { id: 8, nome: "Light Blue", marca: "Dolce & Gabbana", genero: "feminino", preco: "R$ 420,00", tag: "dia", img: "imagens/lightblue.jpg", descricao: "A alegria de viver mediterrânea. Dias ensolarados.", imgLook: "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&w=300&q=80", textoLook: "Perfeito para vestidos leves e praia.", nota: "4.7", linkPagamento: "#" }
         ];
 
-        // --- ESTADO ---
         let generoAtual = null; 
         let ocasiaoAtual = 'todos';
 
         const vitrine = document.getElementById('vitrine-perfumes');
         const modal = document.getElementById('modal-overlay');
 
-        // --- LÓGICA DE ACCORDION ---
         function toggleAccordion(generoClicado) {
             const colMasc = document.getElementById('col-masc');
             const colFem = document.getElementById('col-fem');
 
             if(generoClicado === 'masculino') {
-                if (colMasc.classList.contains('ativo')) return; // Já aberto
+                if (colMasc.classList.contains('ativo')) return; 
                 colMasc.classList.add('ativo');
                 colFem.classList.remove('ativo');
                 filtrarFinal('masculino', 'todos', colMasc.querySelector('.btn-sub'));
@@ -354,11 +370,9 @@
             }
         }
 
-        // --- FILTRO FINAL ---
         function filtrarFinal(genero, ocasiao, botaoClicado) {
             generoAtual = genero;
             ocasiaoAtual = ocasiao;
-
             const colunaAtiva = document.getElementById(genero === 'masculino' ? 'col-masc' : 'col-fem');
             colunaAtiva.querySelectorAll('.btn-sub').forEach(btn => btn.classList.remove('ativo'));
             if(botaoClicado) botaoClicado.classList.add('ativo');
@@ -370,7 +384,6 @@
             renderizar(listaFiltrada);
         }
 
-        // --- RESETAR ---
         function resetarFiltros() {
             generoAtual = null;
             ocasiaoAtual = 'todos';
@@ -380,11 +393,10 @@
             renderizar(listaPerfumes); 
         }
 
-        // --- RENDERIZAR ---
         function renderizar(lista) {
             vitrine.innerHTML = ""; 
             if(lista.length === 0) {
-                vitrine.innerHTML = "<p style='width:100%; color:#888;'>Nenhum perfume encontrado nesta categoria.</p>";
+                vitrine.innerHTML = "<p style='width:100%; color:#888;'>Nenhum perfume encontrado.</p>";
                 return;
             }
             lista.forEach((perfume) => {
@@ -402,7 +414,6 @@
             });
         }
 
-        // --- BUSCA ---
         function filtrarPorTexto() {
             const textoDigitado = document.getElementById('campo-busca').value.toLowerCase();
             if (textoDigitado === '') {
@@ -420,7 +431,6 @@
             renderizar(filtrados);
         }
 
-        // --- MODAL ---
         function abrirModal(id) {
             const perfume = listaPerfumes.find(p => p.id === id);
             document.getElementById('modal-img').src = perfume.img;
