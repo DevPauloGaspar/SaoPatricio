@@ -6,14 +6,15 @@
     <title>São Patrício - Consultoria de Fragrâncias</title>
     
     <link rel="icon" type="image/png" href="favicon.png">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- CONFIGURAÇÕES VISUAIS --- */
         :root {
-            --brand-teal: #2eb0b8;   /* Azul Turquesa (Padrão/Masculino) */
+            --brand-teal: #2eb0b8;   /* Azul Turquesa */
             --brand-blue: #00235d;   /* Azul Marinho */
-            --brand-rose: #d4889e;   /* NOVO: Rosé Elegante (Feminino) */
+            --brand-rose: #d4889e;   /* Rosé */
             --bg-color: #f4f7f6;     
             --card-bg: #ffffff;      
             --text-color: #333333;   
@@ -48,7 +49,7 @@
             margin-bottom: 40px;
         }
 
-        /* --- NOVA ESTRUTURA DE FILTROS (CASCATA/ACCORDION) --- */
+        /* --- FILTROS DE GÊNERO (ACCORDION) --- */
         .filtros-wrapper {
             max-width: 600px;
             margin: 0 auto 50px auto;
@@ -57,7 +58,6 @@
             gap: 15px;
         }
 
-        /* Botão de Reset (Ver Todos) */
         .btn-reset-todos {
             background: none;
             border: none;
@@ -70,24 +70,21 @@
         }
         .btn-reset-todos:hover { color: var(--brand-blue); }
 
-        /* Container dos botões principais lado a lado */
         .filtros-flex-container {
             display: flex;
             gap: 20px;
             justify-content: center;
         }
 
-        /* Coluna individual de filtro (Masculino ou Feminino) */
         .filtro-coluna {
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
-        /* Botões Principais (Gênero) */
         .btn-main-genero {
             background-color: white;
-            border: 2px solid transparent; /* Borda transparente por padrão */
+            border: 2px solid transparent;
             padding: 15px;
             border-radius: 15px;
             cursor: pointer;
@@ -99,25 +96,22 @@
             justify-content: center;
             gap: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            color: #666; /* Cor neutra inicial */
+            color: #666;
         }
 
-        /* Estilo Específico Masculino (Azul/Teal) */
         .btn-main-genero.masc:hover, .btn-main-genero.masc.ativo {
             background-color: var(--brand-teal);
             color: white;
             box-shadow: 0 8px 20px rgba(46, 176, 184, 0.3);
         }
-        /* Estilo Específico Feminino (Rosé) */
         .btn-main-genero.fem:hover, .btn-main-genero.fem.ativo {
             background-color: var(--brand-rose);
             color: white;
             box-shadow: 0 8px 20px rgba(212, 136, 158, 0.3);
         }
 
-        /* --- CASCATA DENTRO (ACCORDION CONTENT) --- */
         .accordion-content {
-            max-height: 0; /* Começa fechado */
+            max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-out, opacity 0.4s ease-out, margin 0.4s ease;
             opacity: 0;
@@ -128,14 +122,12 @@
             padding: 0 5px;
         }
 
-        /* Quando a coluna está ativa, o accordion abre */
         .filtro-coluna.ativo .accordion-content {
-            max-height: 150px; /* Altura suficiente para os botões internos */
+            max-height: 150px;
             opacity: 1;
             margin-top: 15px;
         }
 
-        /* Sub-botões (Dia/Noite) */
         .btn-sub {
             background-color: transparent;
             border: 1px solid #ddd;
@@ -148,15 +140,12 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* Hover/Ativo dos Sub-botões Masculinos */
         .filtro-coluna.masc .btn-sub:hover, .filtro-coluna.masc .btn-sub.ativo {
             background-color: var(--brand-teal); color: white; border-color: var(--brand-teal);
         }
-        /* Hover/Ativo dos Sub-botões Femininos (ROSÉ!) */
         .filtro-coluna.fem .btn-sub:hover, .filtro-coluna.fem .btn-sub.ativo {
             background-color: var(--brand-rose); color: white; border-color: var(--brand-rose);
         }
-
 
         /* BARRA DE PESQUISA */
         .search-container {
@@ -170,7 +159,7 @@
         }
         .search-input:focus { border-color: var(--brand-teal); }
 
-        /* VITRINE E CARDS (Mantido igual) */
+        /* VITRINE E CARDS */
         .vitrine { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
         .card { background-color: var(--card-bg); border: 1px solid #e1e1e1; border-radius: 25px; width: 280px; padding: 25px; box-shadow: 0 15px 30px rgba(0, 35, 93, 0.05); transition: all 0.3s ease; animation: fadeIn 0.6s ease-in-out; display: flex; flex-direction: column; cursor: pointer; position: relative; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -183,7 +172,7 @@
         .btn-ver-detalhes { background-color: transparent; border: 2px solid var(--brand-blue); color: var(--brand-blue); width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: auto; }
         .btn-ver-detalhes:hover { background-color: var(--brand-blue); color: white; }
 
-        /* MODAL (Mantido igual) */
+        /* MODAL */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal-content { background-color: white; width: 90%; max-width: 900px; border-radius: 20px; padding: 30px; position: relative; display: flex; gap: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease; flex-wrap: wrap; }
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -199,7 +188,53 @@
         .look-texto p { margin: 0; font-size: 0.9rem; color: #666; }
         .btn-comprar-modal { background-color: var(--brand-teal); color: white; border: none; padding: 18px; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; width: 100%; transition: 0.3s; }
         .btn-comprar-modal:hover { background-color: var(--brand-blue); }
-        @media (max-width: 768px) { .modal-content { flex-direction: column; overflow-y: auto; max-height: 90vh; } }
+
+        /* RESPONSIVO DO MODAL (CORREÇÃO DE LARGURA) */
+        @media (max-width: 768px) {
+            .modal-content { 
+                flex-direction: column; 
+                padding: 20px;
+                width: 95%; 
+                max-height: 85vh; 
+                overflow-y: auto; 
+                gap: 15px;
+            }
+            .modal-col-esq {
+                min-width: unset;
+                width: 100%;
+                height: 250px; /* Altura fixa para foto não estourar */
+                flex-shrink: 0;
+            }
+            .modal-foto-grande {
+                width: 100%;
+                height: 100%;
+                object-fit: contain; /* Garante que a foto inteira apareça dentro da caixa */
+                background-color: #f4f7f6;
+            }
+            .modal-col-dir {
+                min-width: unset;
+                width: 100%;
+                text-align: center;
+            }
+            .look-card { 
+                flex-direction: column; 
+                text-align: center; 
+            }
+            /* Botão fechar mais visível */
+            .btn-fechar {
+                top: 10px;
+                right: 15px;
+                background-color: rgba(255,255,255,0.8);
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
+            }
+        }
+
         .btn-whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
         .btn-whatsapp-float:hover { transform: scale(1.1); background-color: #128C7E; }
         .btn-whatsapp-float i { font-size: 30px; }
@@ -243,6 +278,7 @@
 
         </div>
     </div>
+
     <div class="search-container">
         <input type="text" id="campo-busca" class="search-input" placeholder="Ou digite o nome do perfume..." onkeyup="filtrarPorTexto()">
     </div>
@@ -278,7 +314,7 @@
     </a>
 
     <script>
-        // --- DADOS DOS PERFUMES (Lembre de usar suas fotos locais) ---
+        // --- DADOS DOS PERFUMES (USANDO IMAGENS LOCAIS 'imagens/...') ---
         const listaPerfumes = [
             // MASCULINOS
             { id: 1, nome: "Bleu de Chanel", marca: "Chanel", genero: "masculino", preco: "R$ 899,00", tag: "noite", img: "imagens/bleu.jpg", descricao: "A fragrância do homem que recusa regras. Um amadeirado aromático intenso, elegante e misterioso.", imgLook: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=300&q=80", textoLook: "Ideal para Terno, Blazer ou Camisa Social. Perfeito para reuniões e casamentos.", nota: "5.0", linkPagamento: "#" },
@@ -293,52 +329,40 @@
             { id: 8, nome: "Light Blue", marca: "Dolce & Gabbana", genero: "feminino", preco: "R$ 420,00", tag: "dia", img: "imagens/lightblue.jpg", descricao: "A alegria de viver mediterrânea. Captura os dias ensolarados de verão.", imgLook: "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&w=300&q=80", textoLook: "Perfeito para vestidos leves, estampas florais e praia.", nota: "4.7", linkPagamento: "#" }
         ];
 
-        // --- ESTADO DOS FILTROS ---
-        let generoAtual = null; // null = mostra tudo
+        // --- ESTADO ---
+        let generoAtual = null; 
         let ocasiaoAtual = 'todos';
 
         const vitrine = document.getElementById('vitrine-perfumes');
         const modal = document.getElementById('modal-overlay');
 
-        // --- NOVA LÓGICA DE ACCORDION E FILTRO ---
-
-        // 1. Função para abrir/fechar o accordion (cascata)
+        // --- LÓGICA DE ACCORDION ---
         function toggleAccordion(generoClicado) {
             const colMasc = document.getElementById('col-masc');
             const colFem = document.getElementById('col-fem');
 
-            // Se clicou no masculino
             if(generoClicado === 'masculino') {
-                // Se já estava aberto, não faz nada (ou poderia fechar, mas acho melhor manter aberto para filtrar)
-                if (colMasc.classList.contains('ativo')) return;
-                
-                // Abre o masculino, fecha o feminino
+                if (colMasc.classList.contains('ativo')) return; // Já aberto
                 colMasc.classList.add('ativo');
                 colFem.classList.remove('ativo');
-                // Filtra automaticamente para todos os masculinos ao abrir
                 filtrarFinal('masculino', 'todos', colMasc.querySelector('.btn-sub'));
-
-            } else { // Clicou no feminino
+            } else {
                 if (colFem.classList.contains('ativo')) return;
-                
                 colFem.classList.add('ativo');
                 colMasc.classList.remove('ativo');
-                 // Filtra automaticamente para todos os femininos ao abrir
                 filtrarFinal('feminino', 'todos', colFem.querySelector('.btn-sub'));
             }
         }
 
-        // 2. Função que aplica o filtro final (Gênero + Ocasião)
+        // --- FILTRO FINAL ---
         function filtrarFinal(genero, ocasiao, botaoClicado) {
             generoAtual = genero;
             ocasiaoAtual = ocasiao;
 
-            // Atualiza visual dos botões menores dentro da coluna ativa
             const colunaAtiva = document.getElementById(genero === 'masculino' ? 'col-masc' : 'col-fem');
             colunaAtiva.querySelectorAll('.btn-sub').forEach(btn => btn.classList.remove('ativo'));
             if(botaoClicado) botaoClicado.classList.add('ativo');
 
-            // Aplica o filtro na lista
             let listaFiltrada = listaPerfumes.filter(p => p.genero === generoAtual);
             if (ocasiaoAtual !== 'todos') {
                 listaFiltrada = listaFiltrada.filter(p => p.tag === ocasiaoAtual);
@@ -346,20 +370,17 @@
             renderizar(listaFiltrada);
         }
 
-        // 3. Função para resetar tudo (botão "Ver Todos")
+        // --- RESETAR ---
         function resetarFiltros() {
             generoAtual = null;
             ocasiaoAtual = 'todos';
             document.getElementById('campo-busca').value = '';
-            // Fecha os accordions e remove ativos
             document.getElementById('col-masc').classList.remove('ativo');
             document.getElementById('col-fem').classList.remove('ativo');
-            document.querySelectorAll('.btn-main-genero, .btn-sub').forEach(btn => btn.classList.remove('ativo'));
-            
-            renderizar(listaPerfumes); // Mostra tudo
+            renderizar(listaPerfumes); 
         }
 
-        // --- RENDERIZAR VITRINE (Mantido) ---
+        // --- RENDERIZAR ---
         function renderizar(lista) {
             vitrine.innerHTML = ""; 
             if(lista.length === 0) {
@@ -369,7 +390,7 @@
             lista.forEach((perfume) => {
                 const cardHTML = `
                     <div class="card" onclick="abrirModal(${perfume.id})">
-                        <img src="${perfume.img}" class="foto-perfume" alt="${perfume.nome}" onerror="this.src='https://via.placeholder.com/300x300?text=FOTO+PENDENTE'">
+                        <img src="${perfume.img}" class="foto-perfume" alt="${perfume.nome}" onerror="this.src='https://via.placeholder.com/300x300?text=FOTO'">
                         <div class="marca">${perfume.marca}</div>
                         <div class="nome">${perfume.nome}</div>
                         <div class="avaliacao">★★★★★ <span style="color:#aaa; font-weight:normal">(${perfume.nota})</span></div>
@@ -381,13 +402,11 @@
             });
         }
 
-        // --- BUSCA POR TEXTO ---
+        // --- BUSCA ---
         function filtrarPorTexto() {
             const textoDigitado = document.getElementById('campo-busca').value.toLowerCase();
             if (textoDigitado === '') {
-                // Se limpou a busca, volta para o estado atual dos filtros
                 if(generoAtual) {
-                     // Re-aplica o filtro que estava ativo
                      let btnAtivo = document.querySelector('.filtro-coluna.ativo .btn-sub.ativo');
                      filtrarFinal(generoAtual, ocasiaoAtual, btnAtivo);
                 } else {
@@ -395,18 +414,13 @@
                 }
                 return;
             }
-            // Se digitou, fecha os filtros visuais para não confundir
             document.getElementById('col-masc').classList.remove('ativo');
             document.getElementById('col-fem').classList.remove('ativo');
-
-            const filtrados = listaPerfumes.filter(p => 
-                p.nome.toLowerCase().includes(textoDigitado) || 
-                p.marca.toLowerCase().includes(textoDigitado)
-            );
+            const filtrados = listaPerfumes.filter(p => p.nome.toLowerCase().includes(textoDigitado) || p.marca.toLowerCase().includes(textoDigitado));
             renderizar(filtrados);
         }
 
-        // --- MODAL (Mantido) ---
+        // --- MODAL ---
         function abrirModal(id) {
             const perfume = listaPerfumes.find(p => p.id === id);
             document.getElementById('modal-img').src = perfume.img;
@@ -421,7 +435,6 @@
         function fecharModal(e) { if (e.target === modal) modal.style.display = 'none'; }
         function fecharModalForce() { modal.style.display = 'none'; }
 
-        // INICIA MOSTRANDO TUDO
         renderizar(listaPerfumes); 
     </script>
 
